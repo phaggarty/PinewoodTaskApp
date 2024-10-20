@@ -1,0 +1,228 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Customer Listing";
+}
+
+<form method="post">
+
+    <div class="text-center">
+        <div style="float: left;"><h3 class="display-8">Customer Listing Page</h3></div>
+        <br />
+
+        <span class="f_right">
+            <a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#staticEditCustomer" data-bs-id="0" data-bs-name="" data-bs-phone="" data-bs-email="" data-bs-address="" data-bs-city="" data-bs-region="" data-bs-postcode="" data-bs-country="" data-bs-invested="0">Add New Customer</a>
+        </span>
+        <br />
+        <table class="table table-primarytable-hover table-striped table-sm" @if (@Model.StatusMessage.Length != 0)
+        {
+            @Html.Raw("hidden")
+        }>
+            <thead class="table-primary">
+                <tr>
+                    <td>Edit</td>
+                    <td>ID</td>
+                    <td><span class="f_left">Name</span></td>
+                    <td><span class="f_left">Phone</span></td>
+                    <td><span class="f_left">Email</span></td>
+                    <td><span class="f_left">Address</span></td>
+                    <td><span class="f_left">City</span></td>
+                    <td><span class="f_left">Region</span></td>
+                    <td><span class="f_left">Postocde</span></td>
+                    <td><span class="f_left">Country</span></td>
+                    <td><span class="f_right">Invested</span></td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Customers)
+                {
+                    <tr>
+                        <td>
+                            <a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#staticEditCustomer" data-bs-id="@item.ID" data-bs-name="@item.Name" data-bs-phone="@item.Phone" data-bs-email="@item.Email" data-bs-address="@item.Address" data-bs-city="@item.City" data-bs-region="@item.Region" data-bs-postcode="@item.Postcode" data-bs-country="@item.Country" data-bs-invested="@item.Invested">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </a>
+                        </td>
+                        <td>@item.ID</td>
+                        <td><span class="f_left">@item.Name</span></td>
+                        <td><span class="f_left">@item.Phone</span></td>
+                        <td><span class="f_left">@item.Email</span></td>
+                        <td><span class="f_left">@item.Address</span></td>
+                        <td><span class="f_left">@item.City</span></td>
+                        <td><span class="f_left">@item.Region</span></td>
+                        <td><span class="f_left">@item.Postcode</span></td>
+                        <td><span class="f_left">@item.Country</span></td>
+                        <td><span class="f_right">@String.Format("{0:C}", item.Invested)</span></td>
+                        <td>
+                            <a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#staticDeleteCustomer" data-bs-id="@item.ID" data-bs-name="@item.Name">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="table-primary">
+                <tr>
+                    <td colspan="3">@Model.Customers.Count() Customers</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="f_right">@String.Format("{0:C}", Model.Customers.Sum(x => x.Invested))</span></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="alert alert-danger" role="alert" @if (@Model.StatusMessage.Length == 0)
+        {
+            @Html.Raw("hidden")
+        }>
+            @Model.StatusMessage
+        </div>
+
+
+    </div>
+
+    <div class="modal fade" id="staticEditCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticEditCustomerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="staticEditCustomerLabel">Customer Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input type="hidden" id="modal_hidden_id" name="modal_hidden_id" value="" />
+                <div class="modal-body">
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Name:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtName" name="txtName" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Phone:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtPhone" name="txtPhone" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Email:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtEmail" name="txtEmail" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Address:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtAddress" name="txtAddress" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">City:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtCity" name="txtCity" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Region:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtRegion" name="txtRegion" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Postcode:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtPostcode" name="txtPostcode" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Country:</div>
+                        <div class="modalcolumn modalright"><input type="text" maxlength="150" id="txtCountry" name="txtCountry" style="width: 300px" /></div>
+                    </div>
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Invested:</div>
+                        <div class="modalcolumn modalright"><input type="number" step="0.01" id="txtInvested" name="txtInvested" style="width: 300px" /></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" asp-page-handler="UpdateCustomer">Update Customer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticDeleteCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticDeleteCustomerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="staticDeleteCustomerLabel">Delete Customer Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input type="hidden" id="modal_hidden_id_delete" name="modal_hidden_id_delete" value="" />
+                <div class="modal-body">
+                    <div class="modalrow">
+                        <div class="modalcolumn modalleft">Name:</div>
+                        <div class="modalcolumn modalright"><label id="txtName_Delete" name="txtName_Delete" /></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" asp-page-handler="DeleteCustomer2">Confirm Delete Customer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const editModal = document.getElementById('staticEditCustomer')
+        editModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const id = button.getAttribute('data-bs-id')
+            const name = button.getAttribute('data-bs-name')
+            const phone = button.getAttribute('data-bs-phone')
+            const email = button.getAttribute('data-bs-email')
+            const address = button.getAttribute('data-bs-address')
+            const city = button.getAttribute('data-bs-city')
+            const region = button.getAttribute('data-bs-region')
+            const postcode = button.getAttribute('data-bs-postcode')
+            const country = button.getAttribute('data-bs-country')
+            const invested = button.getAttribute('data-bs-invested')
+
+            //Update the modal's  content
+            const modalHiddenID = document.getElementById('modal_hidden_id')
+            const modalName = document.getElementById('txtName')
+            const modalPhone = document.getElementById('txtPhone')
+            const modalEmail = document.getElementById('txtEmail')
+            const modalAddress = document.getElementById('txtAddress')
+            const modalCity = document.getElementById('txtCity')
+            const modalRegion = document.getElementById('txtRegion')
+            const modalPostcode = document.getElementById('txtPostcode')
+            const modalCountry = document.getElementById('txtCountry')
+            const modalInvested = document.getElementById('txtInvested')
+
+            modalName.required = true;
+            modalHiddenID.value = `${id}`
+            modalName.value = `${name}`;
+            modalPhone.value = `${phone}`;
+            modalEmail.value = `${email}`;
+            modalAddress.value = `${address}`;
+            modalCity.value = `${city}`;
+            modalRegion.value = `${region}`;
+            modalPostcode.value = `${postcode}`;
+            modalCountry.value = `${country}`;
+            modalInvested.value = `${invested}`;
+        })
+
+        const deleteModal = document.getElementById('staticDeleteCustomer')
+        deleteModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const id = button.getAttribute('data-bs-id')
+            const name = button.getAttribute('data-bs-name')
+
+            //Update the modal's  content
+            const modalHiddenID = document.getElementById('modal_hidden_id_delete')
+            const modalName = document.getElementById('txtName_Delete')
+
+            modalHiddenID.value = `${id}`
+            modalName.innerHTML = `${name}`;
+        })
+
+    </script>
+</form>

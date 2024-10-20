@@ -1,0 +1,33 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "About Task";
+}
+
+<div >
+    <div style="float: left;">
+        <h3 class="display-8">About Task</h3>
+        <br />
+        This technical task was created by Paul Haggarty. <a href="https://www.linkedin.com/in/paul-haggarty" target="_blank">www.linkedin.com/in/paul-haggarty</a>
+        <br /><br />
+        <b>Task Brief:</b>
+        <br /><br />
+        <ul>
+            <li>We’d like you to complete a small self-contained solution that adds, edits, and deletes customers.</li>
+            <li>We’d like you to complete this task using ASP.NET UI project for the fronted, and ASP.NET API for the backend/ data access.</li>
+            <li>You can implement some sort of database/ data storage for this task, or you can hard code it.</li>
+            <li>Please note, this is not a UI/ design exercise, we are not majorly concerned about the look and feel.</li>
+        </ul>
+        <br/>
+        <b>Task Notes:</b>
+        <br /><br />
+        <ul>
+            <li>I have created an ASP.NET Razor front end pages that makes calls to the ASP.Net Web API using the <i>Data/APIData.cs</i> class to retrieve and update data as per the various actions required.</li>
+            <li>The ASP.NET Web API has been included in the same project, <i>Controllers/CustomerController.cs</i> for ease of the task deployment; but it could be kept separately in its own project and deployed on a different server to the front end.</li>
+            <li>There is a requirement to set the base API address, <i>BaseAPIAddress</i> in <i>appsettings.json</i> so that the front end has the address to make the Web API calls. The port number will change when you run the project in Visual Studio, so you will need to update the value to the one used by Visual Studio.</li>
+            <li>The communication between the front end and backend is with HTTP services passing and receiving JSON data.</li>
+            <li>Database storage has been achieved using a List Object of Customer Objects which will not persist between the run session but simulates a database with it storing the data and retrieving the data through the API. It is initialised with some customer records.</li>
+        </ul>
+    </div>
+
+</div>

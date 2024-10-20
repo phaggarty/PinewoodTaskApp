@@ -1,0 +1,50 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.modalcolumn {
+    float: left;
+    padding: 5px;
+}
+
+.modalleft {
+    width: 25%;
+    text-align: right;
+}
+
+.modalright {
+    width: 75%;
+}
+
+.modalrow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.f_right {
+    float: right;
+}
+
+.f_left {
+    float: left;
+}
